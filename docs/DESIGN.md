@@ -52,13 +52,35 @@ The smoke tests verify the pipeline passes an in-memory `AudioChunk` to ASR and 
 For a 5-second sample, run:
 
 ```bash
-python -m voice_edge.app ... --wav samples/vi_5s.wav --no-play
+python -m scripts.pi5_kpi ... --wav samples/vi_5s.wav --iterations 30
 ```
 
 Pass condition:
 
 ```text
-RTF < 0.300
+max_rtf < 0.300
+memory_pass == true
 ```
 
-For memory leak checks, run the same command in a loop on the Pi and watch RSS from `/proc/<pid>/status` or `top`. RSS should stabilize after warm-up instead of growing every cycle.
+The KPI script writes:
+
+- `benchmarks/pi5_kpi_report.json`
+- `benchmarks/pi5_kpi_runs.csv`
+
+The report includes the target machine information, every iteration's ASR/TTS time, RTF, RSS, and final pass/fail summary.
+
+## Current Verification Status
+
+Blocked on real target hardware and real model artifacts.
+
+The development machine used to create this repo is Windows x64, not Raspberry Pi 5 ARM64. Running the benchmark on that machine would not validate ARM NEON use, Pi 5 memory bandwidth, CPU thermal behavior, or the assignment's target latency.
+
+No quantized model files are committed in this repo. The intended runtime artifacts are:
+
+- Whisper Tiny ONNX INT8 encoder
+- Whisper Tiny ONNX INT8 decoder
+- Whisper tokens file
+- Piper/VITS Vietnamese ONNX model
+- Piper/VITS tokens and optional `espeak-ng-data`
+
+Until those files are placed under `models/` on a Raspberry Pi 5 and `scripts.pi5_kpi` passes, the honest status is **not yet proven to meet RTF or no-memory-leak KPIs**.

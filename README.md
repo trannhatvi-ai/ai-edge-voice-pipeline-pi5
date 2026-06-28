@@ -68,6 +68,31 @@ The output prints ASR time, TTS time, input duration, and RTF.
 python -W error::ResourceWarning -m unittest discover -s tests -v
 ```
 
+## KPI Verification on Raspberry Pi 5
+
+Unit tests do not prove the assignment KPIs. Run the KPI script on the real Pi 5 with real quantized models:
+
+```bash
+python -m scripts.pi5_kpi \
+  --wav samples/vi_5s.wav \
+  --iterations 30 \
+  --asr-encoder models/whisper-tiny/tiny-encoder.int8.onnx \
+  --asr-decoder models/whisper-tiny/tiny-decoder.int8.onnx \
+  --asr-tokens models/whisper-tiny/tiny-tokens.txt \
+  --tts-model models/piper-vi/model.onnx \
+  --tts-tokens models/piper-vi/tokens.txt \
+  --tts-data-dir models/piper-vi/espeak-ng-data \
+  --num-threads 2
+```
+
+The run is accepted only if:
+
+- `max_rtf < 0.30`
+- `memory_pass == true`
+- `benchmarks/pi5_kpi_report.json` was generated on Raspberry Pi 5 ARM64, not a desktop/laptop.
+
 ## Submission Notes
 
-The design answers are in `docs/DESIGN.md`. Model binaries are intentionally ignored by git; put them under `models/` on the Pi.
+The design answers are in `docs/DESIGN.md`. Current repository status is implementation-ready, not Pi-verified, until `benchmarks/pi5_kpi_report.json` is produced on the target Raspberry Pi 5.
+
+Model binaries are intentionally ignored by git; put them under `models/` on the Pi. If the grader requires committed model artifacts, use Git LFS or a release asset because ONNX/GGUF model files are too large for a normal git repo.
