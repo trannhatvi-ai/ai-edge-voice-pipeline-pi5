@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-edge-voice-pipeline-pi5"
+version = "0.1.0"
+description = "Offline push-to-talk voice pipeline for Raspberry Pi 5"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+runtime = [
+  "numpy>=1.24",
+  "sherpa-onnx>=1.10",
+]
+
+[tool.setuptools.packages.find]
+include = ["voice_edge*"]
