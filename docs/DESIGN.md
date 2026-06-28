@@ -10,14 +10,14 @@ Reason: the recognizer and TTS engine are Python objects created once in `__init
 
 ## Quantization Choice
 
-For this repo: **INT8 Whisper Tiny ONNX**.
+For this repo: **Whisper Tiny ONNX with INT8 encoder and FP32 decoder**.
 
-Why INT8:
+Why this mixed quantization:
 
-- Good CPU speedup on ARM compared with FP32/FP16-style execution.
-- Lower RAM than FP16.
-- Supported naturally by ONNX Runtime / sherpa-onnx deployment.
-- Accuracy loss should be measured against the original model and must stay within the required 2% WER budget.
+- The official sherpa-onnx archive includes FP32 and INT8 encoder/decoder artifacts.
+- Full INT8 was measured and rejected: on the bundled 3-file test set, its average WER delta was `+0.02336`, which is worse than the allowed 2%.
+- Encoder INT8 + decoder FP32 passed the same check: average WER delta was `-0.00694` versus FP32 baseline.
+- It still reduces encoder compute/memory while keeping decoder accuracy safer.
 
 Why not the other options:
 
@@ -52,7 +52,7 @@ The smoke tests verify the pipeline passes an in-memory `AudioChunk` to ASR and 
 For a 5-second sample, run:
 
 ```bash
-python -m scripts.pi5_kpi ... --wav samples/vi_5s.wav --iterations 30
+python -m scripts.pi5_kpi ... --wav samples/vi_5s.wav --warmup-iterations 3 --iterations 30
 ```
 
 Pass condition:
@@ -71,16 +71,21 @@ The report includes the target machine information, every iteration's ASR/TTS ti
 
 ## Current Verification Status
 
-Blocked on real target hardware and real model artifacts.
+Blocked on real target hardware only.
 
 The development machine used to create this repo is Windows x64, not Raspberry Pi 5 ARM64. Running the benchmark on that machine would not validate ARM NEON use, Pi 5 memory bandwidth, CPU thermal behavior, or the assignment's target latency.
 
-No quantized model files are committed in this repo. The intended runtime artifacts are:
+Model artifacts have been verified locally via `scripts.prepare_models`; they are not committed because they are large binaries. The intended runtime artifacts are:
 
 - Whisper Tiny ONNX INT8 encoder
-- Whisper Tiny ONNX INT8 decoder
+- Whisper Tiny ONNX FP32 decoder
 - Whisper tokens file
 - Piper/VITS Vietnamese ONNX model
 - Piper/VITS tokens and optional `espeak-ng-data`
 
-Until those files are placed under `models/` on a Raspberry Pi 5 and `scripts.pi5_kpi` passes, the honest status is **not yet proven to meet RTF or no-memory-leak KPIs**.
+Local x64 evidence with real models:
+
+- `scripts.asr_quant_report`: passed WER delta check for selected ASR quantization.
+- `scripts.pi5_kpi` on Windows x64: `max_rtf = 0.2014`, `memory_pass = true` with 3 warm-up and 30 measured iterations.
+
+Until the same KPI script passes on a Raspberry Pi 5, the honest target-hardware status is **not yet proven on Pi 5**.

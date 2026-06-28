@@ -11,6 +11,12 @@ from pathlib import Path
 from typing import Sequence
 
 
+def configure_stdio(*streams) -> None:
+    for stream in streams or (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
+
+
 @dataclass(frozen=True)
 class AudioChunk:
     pcm_s16le: bytes
@@ -294,6 +300,15 @@ def read_wav_pcm(path: Path) -> AudioChunk:
         )
 
 
+def write_wav_pcm(path: Path, audio: AudioChunk) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with wave.open(str(path), "wb") as wav:
+        wav.setnchannels(audio.channels)
+        wav.setsampwidth(audio.sample_width_bytes)
+        wav.setframerate(audio.sample_rate)
+        wav.writeframes(audio.pcm_s16le)
+
+
 def build_pipeline(args: argparse.Namespace, *, speaker=None) -> VoicePipeline:
     asr = SherpaWhisperAsr(
         encoder=args.asr_encoder,
@@ -353,6 +368,7 @@ class FixedRecorder:
 
 
 def main(argv: Sequence[str] | None = None) -> int:
+    configure_stdio()
     args = parse_args(argv or sys.argv[1:])
     speaker = NullSpeaker() if args.no_play else None
     pipeline = build_pipeline(args, speaker=speaker)

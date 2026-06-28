@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import ctypes
 import csv
 import json
 import platform
@@ -24,8 +25,50 @@ def parse_rss_kb(status_text: str) -> int | None:
 def current_rss_kb() -> int | None:
     status = Path("/proc/self/status")
     if not status.exists():
-        return None
+        return current_windows_rss_kb()
     return parse_rss_kb(status.read_text(encoding="utf-8", errors="replace"))
+
+
+def current_windows_rss_kb() -> int | None:
+    if platform.system().lower() != "windows":
+        return None
+
+    from ctypes import wintypes
+
+    class PROCESS_MEMORY_COUNTERS(ctypes.Structure):
+        _fields_ = [
+            ("cb", wintypes.DWORD),
+            ("PageFaultCount", wintypes.DWORD),
+            ("PeakWorkingSetSize", ctypes.c_size_t),
+            ("WorkingSetSize", ctypes.c_size_t),
+            ("QuotaPeakPagedPoolUsage", ctypes.c_size_t),
+            ("QuotaPagedPoolUsage", ctypes.c_size_t),
+            ("QuotaPeakNonPagedPoolUsage", ctypes.c_size_t),
+            ("QuotaNonPagedPoolUsage", ctypes.c_size_t),
+            ("PagefileUsage", ctypes.c_size_t),
+            ("PeakPagefileUsage", ctypes.c_size_t),
+        ]
+
+    counters = PROCESS_MEMORY_COUNTERS()
+    counters.cb = ctypes.sizeof(counters)
+    kernel32 = ctypes.WinDLL("kernel32.dll", use_last_error=True)
+    psapi = ctypes.WinDLL("psapi.dll", use_last_error=True)
+    kernel32.GetCurrentProcess.argtypes = []
+    kernel32.GetCurrentProcess.restype = wintypes.HANDLE
+    psapi.GetProcessMemoryInfo.argtypes = [
+        wintypes.HANDLE,
+        ctypes.POINTER(PROCESS_MEMORY_COUNTERS),
+        wintypes.DWORD,
+    ]
+    psapi.GetProcessMemoryInfo.restype = wintypes.BOOL
+    ok = psapi.GetProcessMemoryInfo(
+        kernel32.GetCurrentProcess(),
+        ctypes.byref(counters),
+        counters.cb,
+    )
+    if not ok:
+        return None
+    return int(counters.WorkingSetSize / 1024)
 
 
 def detect_target() -> dict[str, object]:
@@ -65,17 +108,20 @@ def summarize_runs(
     rtf_limit: float,
     rss_growth_limit_kb: int,
 ) -> dict[str, object]:
-    rtfs = [float(run["rtf"]) for run in runs]
+    measured = [
+        run for run in runs if run.get("phase", "measure") == "measure"
+    ]
+    rtfs = [float(run["rtf"]) for run in measured]
     rss_values = [
         int(run["rss_kb"])
-        for run in runs
+        for run in measured
         if run.get("rss_kb") is not None
     ]
     rss_growth = max(rss_values) - min(rss_values) if len(rss_values) >= 2 else None
     max_rtf = max(rtfs) if rtfs else 0.0
     avg_rtf = sum(rtfs) / len(rtfs) if rtfs else 0.0
     return {
-        "runs": len(runs),
+        "runs": len(measured),
         "avg_rtf": avg_rtf,
         "max_rtf": max_rtf,
         "rtf_limit": rtf_limit,
@@ -90,6 +136,7 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run Pi 5 RTF/RAM KPI benchmark")
     parser.add_argument("--wav", type=Path, required=True, help="Mono 16-bit PCM WAV, ideally 5 seconds")
     parser.add_argument("--iterations", type=int, default=30)
+    parser.add_argument("--warmup-iterations", type=int, default=3)
     parser.add_argument("--rtf-limit", type=float, default=0.30)
     parser.add_argument("--rss-growth-limit-kb", type=int, default=64 * 1024)
     parser.add_argument("--output-dir", type=Path, default=Path("benchmarks"))
@@ -111,17 +158,22 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = parse_args(argv or sys.argv[1:])
     if args.iterations < 2:
         raise ValueError("--iterations must be >= 2 to measure memory growth")
+    if args.warmup_iterations < 0:
+        raise ValueError("--warmup-iterations must be >= 0")
 
     audio = read_wav_pcm(args.wav)
     pipeline = build_pipeline(args, speaker=NullSpeaker())
     pipeline._recorder = FixedRecorder(audio)
 
     runs = []
-    for index in range(1, args.iterations + 1):
+    total_iterations = args.warmup_iterations + args.iterations
+    for index in range(1, total_iterations + 1):
         pipeline.start_recording()
         result = pipeline.stop_and_process()
+        phase = "warmup" if index <= args.warmup_iterations else "measure"
         row = {
             "iteration": index,
+            "phase": phase,
             "input_seconds": result.input_seconds,
             "asr_seconds": result.asr_seconds,
             "tts_seconds": result.tts_seconds,
@@ -131,7 +183,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         }
         runs.append(row)
         print(
-            f"iter={index} rtf={result.rtf:.3f} "
+            f"iter={index} phase={phase} rtf={result.rtf:.3f} "
             f"asr={result.asr_seconds:.3f}s tts={result.tts_seconds:.3f}s "
             f"rss_kb={row['rss_kb']}"
         )

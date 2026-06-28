@@ -35,6 +35,20 @@ class KpiTests(unittest.TestCase):
         self.assertFalse(summary["memory_pass"])
         self.assertEqual(summary["rss_growth_kb"], 69000)
 
+    def test_summarize_runs_ignores_warmup_rows(self):
+        summary = summarize_runs(
+            [
+                {"rtf": 0.20, "rss_kb": 1000, "phase": "warmup"},
+                {"rtf": 0.20, "rss_kb": 70000, "phase": "measure"},
+                {"rtf": 0.20, "rss_kb": 70004, "phase": "measure"},
+            ],
+            rtf_limit=0.30,
+            rss_growth_limit_kb=64 * 1024,
+        )
+
+        self.assertTrue(summary["memory_pass"])
+        self.assertEqual(summary["rss_growth_kb"], 4)
+
 
 if __name__ == "__main__":
     unittest.main()

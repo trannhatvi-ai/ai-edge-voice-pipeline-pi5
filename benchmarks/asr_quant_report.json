@@ -1,0 +1,46 @@
+{
+  "summary": {
+    "files": 3,
+    "avg_fp32_wer": 0.05808080808080809,
+    "avg_quant_wer": 0.05113636363636364,
+    "avg_wer_delta": -0.006944444444444443,
+    "wer_delta_pass": true,
+    "quant_encoder": "tiny-encoder.int8.onnx",
+    "quant_decoder": "tiny-decoder.onnx"
+  },
+  "rows": [
+    {
+      "file": "0.wav",
+      "reference": "AFTER EARLY NIGHTFALL THE YELLOW LAMPS WOULD LIGHT UP HERE AND THERE THE SQUALID QUARTER OF THE BROTHELS",
+      "fp32_text": " After early nightfall, the yellow lamps would light up here and there the squalid quarter of the brothels.",
+      "quant_text": " After early nightfall the yellow lamps would light up here and there the squalid quarter of the brothels.",
+      "fp32_wer": 0.0,
+      "quant_wer": 0.0,
+      "wer_delta": 0.0,
+      "fp32_seconds": 0.8461027000012109,
+      "quant_seconds": 0.8223898999931407
+    },
+    {
+      "file": "1.wav",
+      "reference": "GOD AS A DIRECT CONSEQUENCE OF THE SIN WHICH MAN THUS PUNISHED HAD GIVEN HER A LOVELY CHILD WHOSE PLACE WAS ON THAT SAME DISHONOURED BOSOM TO CONNECT HER PARENT FOR EVER WITH THE RACE AND DESCENT OF MORTALS AND TO BE FINALLY A BLESSED SOUL IN HEAVEN",
+      "fp32_text": " God, as a direct consequence of the sin which man thus punished, had given her a lovely child whose place was on that same dishonored bosom to connect her parrot forever with the race and descent of mortals, and to be finally a blessed soul in heaven.\"",
+      "quant_text": " God, as a direct consequence of the sin which man thus punished, had given her a lovely child whose place was on that same dishonored bosom to connect her parent forever with the race and descent of mortals, and to be finally a blessed soul in heaven.\"",
+      "fp32_wer": 0.08333333333333333,
+      "quant_wer": 0.0625,
+      "wer_delta": -0.02083333333333333,
+      "fp32_seconds": 1.9256859999950393,
+      "quant_seconds": 2.25157589999435
+    },
+    {
+      "file": "8k.wav",
+      "reference": "YET THESE THOUGHTS AFFECTED HESTER PRYNNE LESS WITH HOPE THAN APPREHENSION",
+      "fp32_text": " Yet these thoughts affected Hester-Prin less with hope than apprehension.",
+      "quant_text": " Yet these thoughts affected Hester-Prin less with hope than apprehension.",
+      "fp32_wer": 0.09090909090909091,
+      "quant_wer": 0.09090909090909091,
+      "wer_delta": 0.0,
+      "fp32_seconds": 0.5784955000053742,
+      "quant_seconds": 0.6610847000047215
+    }
+  ]
+}
