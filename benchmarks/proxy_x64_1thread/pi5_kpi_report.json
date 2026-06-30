@@ -1,0 +1,350 @@
+{
+  "target": {
+    "platform": "Windows-11-10.0.26220-SP0",
+    "machine": "AMD64",
+    "processor": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
+    "python": "3.12.13"
+  },
+  "summary": {
+    "runs": 30,
+    "avg_rtf": 0.20595320399999462,
+    "max_rtf": 0.26655513999994584,
+    "rtf_limit": 0.3,
+    "rtf_pass": true,
+    "rss_growth_kb": 10556,
+    "rss_growth_limit_kb": 65536,
+    "memory_pass": true
+  },
+  "runs": [
+    {
+      "iteration": 1,
+      "phase": "warmup",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.8055052999998225,
+      "tts_seconds": 0.34188350000022183,
+      "rtf": 0.22947776000000886,
+      "rss_kb": 394964,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 2,
+      "phase": "warmup",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.8223158999999214,
+      "tts_seconds": 0.30728640000006635,
+      "rtf": 0.22592045999999755,
+      "rss_kb": 452248,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 3,
+      "phase": "warmup",
+      "input_seconds": 5.0,
+      "asr_seconds": 1.058478799999648,
+      "tts_seconds": 0.3116650000001755,
+      "rtf": 0.2740287599999647,
+      "rss_kb": 454144,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 4,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.7564038000000437,
+      "tts_seconds": 0.27791460000025836,
+      "rtf": 0.20686368000006042,
+      "rss_kb": 454172,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 5,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.756454500000018,
+      "tts_seconds": 0.26261939999994866,
+      "rtf": 0.20381477999999334,
+      "rss_kb": 462020,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 6,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.733968399999867,
+      "tts_seconds": 0.29310850000001665,
+      "rtf": 0.20541537999997672,
+      "rss_kb": 462080,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 7,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.6974661999997807,
+      "tts_seconds": 0.2851591000003282,
+      "rtf": 0.19652506000002176,
+      "rss_kb": 462092,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 8,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.808177799999612,
+      "tts_seconds": 0.2544329000002108,
+      "rtf": 0.21252213999996455,
+      "rss_kb": 462096,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 9,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.7171591999999691,
+      "tts_seconds": 0.2532787999998618,
+      "rtf": 0.1940875999999662,
+      "rss_kb": 462096,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 10,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.7047308000001067,
+      "tts_seconds": 0.2909581999997499,
+      "rtf": 0.19913779999997133,
+      "rss_kb": 462096,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 11,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.7238106999998308,
+      "tts_seconds": 0.2606575999998313,
+      "rtf": 0.1968936599999324,
+      "rss_kb": 462100,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 12,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.7531398000000991,
+      "tts_seconds": 0.28616839999995136,
+      "rtf": 0.2078616400000101,
+      "rss_kb": 462920,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 13,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.7758038000001761,
+      "tts_seconds": 0.27480800000012096,
+      "rtf": 0.2101223600000594,
+      "rss_kb": 463268,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 14,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.9061212999999952,
+      "tts_seconds": 0.30808969999998226,
+      "rtf": 0.2428421999999955,
+      "rss_kb": 463268,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 15,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.7795482999999876,
+      "tts_seconds": 0.25729080000019167,
+      "rtf": 0.20736782000003587,
+      "rss_kb": 463636,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 16,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.7701731000001928,
+      "tts_seconds": 0.2831944999998086,
+      "rtf": 0.21067352000000028,
+      "rss_kb": 464468,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 17,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.7767057999999452,
+      "tts_seconds": 0.29335360000004584,
+      "rtf": 0.2140118799999982,
+      "rss_kb": 464532,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 18,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 1.0639993999998296,
+      "tts_seconds": 0.2687762999998995,
+      "rtf": 0.26655513999994584,
+      "rss_kb": 464532,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 19,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.8839031999996223,
+      "tts_seconds": 0.2757713999999396,
+      "rtf": 0.2319349199999124,
+      "rss_kb": 464532,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 20,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.731407599999784,
+      "tts_seconds": 0.23787860000038563,
+      "rtf": 0.19385724000003393,
+      "rss_kb": 464532,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 21,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.6773370000000796,
+      "tts_seconds": 0.24186380000037389,
+      "rtf": 0.18384016000009068,
+      "rss_kb": 464532,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 22,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.7826763000002757,
+      "tts_seconds": 0.29714560000002166,
+      "rtf": 0.21596438000005946,
+      "rss_kb": 464532,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 23,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.8100420999999187,
+      "tts_seconds": 0.28431860000000597,
+      "rtf": 0.21887213999998495,
+      "rss_kb": 464532,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 24,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.711220400000002,
+      "tts_seconds": 0.2641877000000932,
+      "rtf": 0.19508162000001902,
+      "rss_kb": 464536,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 25,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.7185122999999294,
+      "tts_seconds": 0.23440049999999246,
+      "rtf": 0.19058255999998436,
+      "rss_kb": 464536,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 26,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.6976224999998522,
+      "tts_seconds": 0.2941894999999022,
+      "rtf": 0.19836239999995087,
+      "rss_kb": 464536,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 27,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.6891304999999193,
+      "tts_seconds": 0.26899279999997816,
+      "rtf": 0.1916246599999795,
+      "rss_kb": 464536,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 28,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.7629342999998698,
+      "tts_seconds": 0.24796229999992647,
+      "rtf": 0.20217931999995925,
+      "rss_kb": 464536,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 29,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.714656599999671,
+      "tts_seconds": 0.23835760000019945,
+      "rtf": 0.1906028399999741,
+      "rss_kb": 464536,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 30,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.7240881000002446,
+      "tts_seconds": 0.2617092999998931,
+      "rtf": 0.19715948000002753,
+      "rss_kb": 464536,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 31,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.7588347000000795,
+      "tts_seconds": 0.2895650000000387,
+      "rtf": 0.20967994000002363,
+      "rss_kb": 464728,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 32,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.6966062999999849,
+      "tts_seconds": 0.24703839999983757,
+      "rtf": 0.18872893999996448,
+      "rss_kb": 464728,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    },
+    {
+      "iteration": 33,
+      "phase": "measure",
+      "input_seconds": 5.0,
+      "asr_seconds": 0.6946548999999322,
+      "tts_seconds": 0.2824993999997787,
+      "rtf": 0.1954308599999422,
+      "rss_kb": 464728,
+      "text": "xin cho đây là bà tính trái dọng nó tính, vị trân thích bởi bình."
+    }
+  ]
+}

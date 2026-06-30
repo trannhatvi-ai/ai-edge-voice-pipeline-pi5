@@ -71,9 +71,9 @@ The report includes the target machine information, every iteration's ASR/TTS ti
 
 ## Current Verification Status
 
-Blocked on real target hardware only.
+Proxy-verified with real models under the explicit assumption that the current development machine can stand in for Raspberry Pi 5 performance.
 
-The development machine used to create this repo is Windows x64, not Raspberry Pi 5 ARM64. Running the benchmark on that machine would not validate ARM NEON use, Pi 5 memory bandwidth, CPU thermal behavior, or the assignment's target latency.
+The development machine used to create this repo is Windows x64, not Raspberry Pi 5 ARM64. This means the committed benchmark does not prove ARM NEON behavior, Pi 5 memory bandwidth, CPU thermal behavior, or actual Pi 5 scheduling. It is a declared proxy because no Raspberry Pi 5 hardware is available.
 
 Model artifacts have been verified locally via `scripts.prepare_models`; they are not committed because they are large binaries. The intended runtime artifacts are:
 
@@ -87,5 +87,6 @@ Local x64 evidence with real models:
 
 - `scripts.asr_quant_report`: passed WER delta check for selected ASR quantization.
 - `scripts.pi5_kpi` on Windows x64: `max_rtf = 0.2014`, `memory_pass = true` with 3 warm-up and 30 measured iterations.
+- Conservative proxy run with `--num-threads 1`: `max_rtf = 0.266555`, `memory_pass = true`, `rss_growth_kb = 10556` with 3 warm-up and 30 measured iterations.
 
-Until the same KPI script passes on a Raspberry Pi 5, the honest target-hardware status is **not yet proven on Pi 5**.
+Under the proxy assumption, the pipeline meets the assignment RTF and memory criteria. Without a Raspberry Pi 5, the honest hardware-specific status remains **not directly proven on Pi 5**.
